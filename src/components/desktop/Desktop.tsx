@@ -5,10 +5,15 @@ import { Window } from '../window/Window';
 import { AppRenderer } from '../window/AppRenderer';
 import { useWindowManager } from '../window/WindowManagerProvider';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
+import { ActivitiesOverview } from './ActivitiesOverview';
 
 export function Desktop() {
   const { state } = useWindowManager();
   const isMobile = useIsMobile();
+  
+  // Initialize keyboard shortcuts
+  useKeyboardShortcuts();
 
   return (
     <div className="relative w-full h-full overflow-hidden">
@@ -32,6 +37,9 @@ export function Desktop() {
 
       {/* Dock */}
       <Dock isMobile={isMobile} />
+
+      {/* Activities Overview Overlay */}
+      <ActivitiesOverview />
     </div>
   );
 }
