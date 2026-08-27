@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* Hero futuristic component animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeInSubtitle {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes exploreAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.fade-in-subtitle {
+  animation: fadeInSubtitle 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.explore-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+  transition: background 0.25s, box-shadow 0.25s;
+  opacity: 0;
+  animation: exploreAppear 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: auto;
+}
+
+.explore-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 24px 2px rgba(255, 0, 60, 0.12);
+}
+
+.explore-arrow {
+  display: flex;
+  align-items: center;
+  animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+.arrow-svg {
+  display: block;
+}
+
+/* Global resets */
+body {
+  margin: 0;
+  background: #000;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CSS-only scan line — replaces the GPU post-processing pass */
+@keyframes scanLine {
+  0%   { top: -10%; }
+  50%  { top: 100%; }
+  100% { top: -10%; }
+}
+
+.scan-line-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.scan-line-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 0, 0, 0.08),
+    rgba(255, 0, 0, 0.15),
+    rgba(255, 0, 0, 0.08),
+    transparent
+  );
+  animation: scanLine 4s ease-in-out infinite;
+  filter: blur(6px);
+}
